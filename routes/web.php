@@ -42,3 +42,12 @@ Route::match(['get', 'post'], '/pay', [App\Http\Controllers\PaymentController::c
 
 
 Route::get('/payment/callback', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback']);
+
+
+Route::get('/success', function () {
+    return view('success');
+})->name('success');
+
+Route::get('/error', function () {
+    return view('error');
+})->name('error');

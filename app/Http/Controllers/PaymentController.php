@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\UserTicket;
 use Illuminate\Support\Facades\Redirect;
 use Paystack;
 
@@ -32,8 +33,16 @@ class PaymentController extends Controller
     public function handleGatewayCallback()
     {
         $paymentDetails = Paystack::getPaymentData();
+        if ($paymentDetails['status']) {
 
-        dd($paymentDetails);
+            $ticket = UserTicket::where('reference', $paymentDetails['data']['reference'])->first();
+            $ticket->status = 1;
+            $ticket->save();
+
+            return Redirect::route('success')->withMessage(['msg' => 'Your ticket has been successfully paid.', 'type' => 'success']);
+        } else {
+            return Redirect::back()->with('error', 'The payment was not successful. Please try again.');
+        }
         // Now you have the payment details,
         // you can store the authorization_code in your db to allow for recurrent subscriptions
         // you can then redirect or do whatever you want

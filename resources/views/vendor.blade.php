@@ -15,7 +15,7 @@
         <form method="POST" action="{{ route('get-tickets') }}">
             @csrf
             <label for="vendor" class="block text-sm font-medium text-gray-600 mt-8">vendor</label>
-            <select id="vendor" name="vendor_id" class="mt-1 block w-full pl-3 pr-10 py-4 text-base border-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+            <select required="true" id="vendor" name="vendor_id" class="mt-1 block w-full pl-3 pr-10 py-4 text-base border-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                 <option>select</option>
                 @forelse ($vendors as $item)
                     <option value="{{ $item->id }}">{{ $item->name }}</option>

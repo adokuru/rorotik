@@ -36,7 +36,7 @@ class HomeController extends Controller
 
     public function payTicket(Request $request)
     {
-
+        $percentage = 3.5;
         $request->validate([
             'vendor_id' => 'required',
             'ticket_type_id' => 'required',
@@ -59,7 +59,9 @@ class HomeController extends Controller
             'reference' => Paystack::genTranxRef(),
         ]);
 
-        return view('payTicket', compact('vendor', 'ticket', 'ticketType'));
+        $percentamount  = ($percentage / 100) * $request->amount;
+        $amount = $request->amount + $percentamount;
+        return view('payTicket', compact('vendor', 'ticket', 'ticketType', 'amount'));
     }
 
     public function generateTicketCode()
@@ -77,7 +79,7 @@ class HomeController extends Controller
     {
         $data = array(
             "amount" => $request->amount * 100,
-            "reference" => $request->email,
+            "reference" => $request->reference,
             "email" => $request->email,
             "currency" => "NGN",
             "orderID" => $request->ticket_code,
