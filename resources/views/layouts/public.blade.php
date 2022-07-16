@@ -79,6 +79,7 @@
                         <div class="hidden md:flex md:space-x-10 md:items-center md:right-0 flex-1 md:absolute md:inset-y-0">
                             <a href="#" class="font-bold text-lg text-gray-500 hover:text-gray-900">Food</a>
                             <a href="#" class="font-bold text-lg text-gray-500 hover:text-gray-900">Transports</a>
+                            <a href="/login" class="font-bold text-lg text-gray-500 hover:text-gray-900">Login</a>
                         </div>
                        
                     </nav>
@@ -113,6 +114,7 @@
                         <div class="px-2 pt-2 pb-3 ">
                             <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Food</a>
                             <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Transport</a>
+                            <a href="/login" class="font-bold text-lg text-gray-500 hover:text-gray-900">Login</a>
                         </div>
                         <a href="#" class="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100">
                             Log in

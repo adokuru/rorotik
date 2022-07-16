@@ -12,74 +12,9 @@ class UserTicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\UserTicket  $userTicket
-     * @return \Illuminate\Http\Response
-     */
-    public function show(UserTicket $userTicket)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\UserTicket  $userTicket
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(UserTicket $userTicket)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UserTicket  $userTicket
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, UserTicket $userTicket)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\UserTicket  $userTicket
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(UserTicket $userTicket)
-    {
-        //
+        $ticket = UserTicket::where('ticket_code', $request->code)->first();
+        return view('dashboard', compact('ticket'));
     }
 }

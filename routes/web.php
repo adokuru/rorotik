@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserTicketController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,3 +52,6 @@ Route::get('/success', function () {
 Route::get('/error', function () {
     return view('error');
 })->name('error');
+
+
+Route::any('/search-results', [UserTicketController::class, 'index'])->name('search_results');

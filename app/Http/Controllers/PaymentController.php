@@ -6,9 +6,13 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Mail\NewTicket;
 use App\Models\UserTicket;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Paystack;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Unicodeveloper\Paystack\Facades\Paystack as FacadesPaystack;
 
 class PaymentController extends Controller
 {
@@ -32,13 +36,18 @@ class PaymentController extends Controller
      */
     public function handleGatewayCallback()
     {
-        $paymentDetails = Paystack::getPaymentData();
+        $paymentDetails = FacadesPaystack::getPaymentData();
         if ($paymentDetails['status']) {
 
             $ticket = UserTicket::where('reference', $paymentDetails['data']['reference'])->first();
             $ticket->status = 1;
             $ticket->save();
-
+            $qr = QrCode::format('png')->size(200)->generate('http://google.com');
+            $mailData = [
+                'code' =>  $ticket->ticket_code,
+                'qr' => $qr
+            ];
+            Mail::to($ticket->customer_email)->send(new NewTicket($mailData));
             return Redirect::route('success')->withMessage(['msg' => 'Your ticket has been successfully paid.', 'type' => 'success']);
         } else {
             return Redirect::back()->with('error', 'The payment was not successful. Please try again.');
