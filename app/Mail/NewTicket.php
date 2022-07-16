@@ -32,6 +32,6 @@ class NewTicket extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.newTicket')->with('details', $this->mailData);
+        return $this->view('emails.newTicket')->with('details', $this->mailData);
     }
 }
